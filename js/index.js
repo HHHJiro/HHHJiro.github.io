@@ -8,7 +8,7 @@ var vm = new Vue({
 				size:4,
 				content:[{
 					ctitle:'腾讯首页',
-					href:'#'
+					href:'../hoogeek/csstrain/qq_index/html/qq.html'
 					},
 					{
 					ctitle:'照片墙',
