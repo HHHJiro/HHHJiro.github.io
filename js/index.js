@@ -8,11 +8,11 @@ var vm = new Vue({
 				size:4,
 				content:[{
 					ctitle:'腾讯首页',
-					href:'../hoogeek/csstrain/qq_index/html/qq.html'
+					href:'pages/cssabout/qq_index/html/qq.html'
 					},
 					{
 					ctitle:'照片墙',
-					href:'#'
+					href:'pages/cssabout/album/album.html'
 					}]
 			},
 			{
@@ -20,40 +20,49 @@ var vm = new Vue({
 				size:4,
 				show:true,
 				content:[{
-					ctitle:'js轮播图1',
-					href:'#'
+					ctitle:'js轮播图',
+					href:'pages/jsabout/PicCarousel/PicCarousel.html'
 					},
 					{
-					ctitle:'js轮播图2',
-					href:'#'
+					ctitle:'js滚动图',
+					href:'pages/jsabout/heroroll/framcc.html'
 					},
 					{
 					ctitle:'js选项卡',
-					href:'#'
+					href:'pages/jsabout/tab/tab2.html'
 					},
 					{
 					ctitle:'js日历',
-					href:'#'
+					href:'pages/jsabout/calendar/calendar_nooutjs.html'
 					},
 					{
 					ctitle:'原生js select插件',
-					href:'#'
+					href:'pages/jsabout/select/index.html'
 					}],
 			}
 			],
 	},
 	methods:{
 		shownext: function(item){
-			item.show = !item.show;
-			if (item.show) {
+			if (item.show == false) {
+				item.show = !item.show;
 				item.size = 4;
 				this.flag = 0;
+				return ; 
 			}
 			else{
+				for (var i = this.test.length - 1; i >= 0; i--) {
+					this.test[i].show = true 
+					this.test[i].size = 4
+					this.flag = 0
+				}
+				item.show = !item.show;
 				item.size = item.content.length * 32;
-				this.flag = 1;
+				this.flag = 1;	
 			}
-			
+		},
+		doThis: function(link){
+			window.open(link.href)
 		}
 	}
 })
