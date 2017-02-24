@@ -13,12 +13,14 @@
 			<ul>
 				<li v-for="item in test" class="li liout" :style="{ marginBottom: item.size + 'px' }" @click="shownext(item)">
 					{{item.title}}
-					<ul class="block" :style="{ opacity: flag }">
-						<li v-for="link in item.content" :class="{show:item.show}" class="lin"
-						@click.stop="doThis(link)">
-							<a :href="link.href" @click.prevent="" >{{link.ctitle}}</a>
-						</li>
-					</ul>
+					<transition name="fade">
+						<ul v-if="!item.show">
+							<li v-for="link in item.content" :class="{show:item.show}" class="lin"
+							@click.stop="doThis(link)">
+								<a :href="link.href" @click.prevent="" >{{link.ctitle}}</a>
+							</li>
+						</ul>
+					</transition>
 				</li>
 			</ul>
 		</div>

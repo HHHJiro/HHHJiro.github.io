@@ -12,22 +12,22 @@ body{
 }
 ul, ol, li {
 	list-style: none;
-	transition: all 0.3s;
+	transition: ease 0.5s;
 	color:#FAFAFA;
 }
 h1{
-	text-indent: 1em;
+	text-indent: 0.7em;
 }
 a{
 	text-decoration: none;
 }
 .container{
 	position: absolute;
-	width: 400px;
+	width: 300px;
 	height: 300px;
 	left: 50%;
 	top: 50%;
-	margin-left: -200px;
+	margin-left: -150px;
 	margin-top: -150px;
 }
 .li{
@@ -68,4 +68,10 @@ a{
 }
 .lin a:hover{
 	color: 
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-active {
+  opacity: 0
 }
