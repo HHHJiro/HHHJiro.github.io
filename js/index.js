@@ -13,6 +13,10 @@ var vm = new Vue({
 					{
 					ctitle:'照片墙',
 					href:'pages/cssabout/album/album.html'
+					},
+					{
+						ctitle:'div属性改变',
+						href:'pages/cssabout/change-div.html'
 					}]
 			},
 			{

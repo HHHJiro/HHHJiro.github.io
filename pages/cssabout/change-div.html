@@ -9,7 +9,7 @@
 	}
 		.container{
 			margin: 50px auto;
-			width: 500px;
+			width: 600px;
 			height: 400px;
 		}
 		#div1{
@@ -43,6 +43,10 @@
 			top: -36px;
 			left: 32px;
 		}
+		#reset{
+			position: relative;
+			width: auto;
+		}
 	</style>
 </head>
 <body>
@@ -50,18 +54,25 @@
 		<div id="div2"><button>1</button></div>
 		<div id="div1"><button>2</button></div>
 		<div id="div3"><button>3</button></div>
+		<button id="reset">reset</button>
 	</div>
 	<script type="text/javascript">
 		var btns =  document.getElementsByTagName('button')
 		var divs =  document.getElementsByTagName('div')
-		btns[0].onclick = function(e){
+		var reset =  document.getElementById('reset')
+		btns[0].onclick = function(){
 			divs[1].style.height = '150px'
 		}
-		btns[1].onclick = function(e){
+		btns[1].onclick = function(){
 			divs[2].style.width = '150px'
 		}
-		btns[2].onclick = function(e){
+		btns[2].onclick = function(){
 			divs[3].style.backgroundColor = '#FF4949'
+		}
+		reset.onclick = function(){
+			divs[1].style.height = '100px'
+			divs[2].style.width = '100px'
+			divs[3].style.backgroundColor = '#F7BA2A'
 		}
 	</script>
 </body>
