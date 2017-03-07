@@ -3,7 +3,7 @@ var vm = new Vue({
 	data:{
 		flag:0,
 		test:[{
-				title:'静态demo,css相关',
+				title:'Chapter 1',
 				show:true,
 				size:4,
 				content:[{
@@ -17,10 +17,19 @@ var vm = new Vue({
 					{
 						ctitle:'div属性改变',
 						href:'pages/cssabout/change-div.html'
-					}]
+					},
+					{
+						ctitle:'字符串反转',
+						href:'pages/cssabout/reverse.html'
+					},
+					{
+						ctitle:'上传图片预览',
+						href:'pages/cssabout/preview.html'
+					}
+					]
 			},
 			{
-				title:'原生javascript',
+				title:'Chapter 2',
 				size:4,
 				show:true,
 				content:[{
