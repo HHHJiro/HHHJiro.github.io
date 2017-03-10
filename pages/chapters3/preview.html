@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		.cen{
+			width: 400px;
+			height: 400px;
+			margin: 50px auto;
+		}
+	</style>
+</head>
+<body>
+<div class="cen">
+	<input type="file" name="file" onchange="showPreview(this)" />
+	<img id="portrait" src="" width="300" height="300">
+</div>
+<script type="text/javascript">
+	function showPreview(source) {
+	  var file = source.files[0];
+	  if(window.FileReader) {
+	      var fr = new FileReader();
+	      fr.onloadend = function(e) {
+	        document.getElementById("portrait").src = e.target.result;
+	      };
+	      fr.readAsDataURL(file);
+	  }
+	}
+
+</script>
+</body>
+</html>
