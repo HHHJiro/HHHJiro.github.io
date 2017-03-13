@@ -75,8 +75,26 @@ var vm = new Vue({
 					ctitle:'原生js select插件',
 					href:'pages/chapters3/select/index.html'
 					}],
+			},
+			{
+				title:'Chapter 4',
+				size:4,
+				show:true,
+				content:[{
+					ctitle:'Jsonp获取豆瓣Api',
+					href:'pages/chapters4/doubanApi.html'
+					},
+					{
+						ctitle:'事件监听',
+						href:'pages/chapters4/eventEntrust.html'
+					},
+					{
+						ctitle:'async/await小球动画',
+						href:'pages/chapters4/ball.html'
+					}
+					]
 			}
-			],
+			]
 	},
 	methods:{
 		shownext: function(item){

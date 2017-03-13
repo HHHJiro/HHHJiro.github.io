@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.2/vue.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.min.js"></script>
+	<title>Resume</title>
+</head>
+<body>
+		<div class="container">
+		<div id="resume" class="styleEditor" ref="res">
+			<pre>
+				{{resume}}
+			</pre>
+			<div v-html="styleCode">
+			</div>
+		</div>
+		<div id="resumeEditor" class=".resumeEditor" v-if="flag" ref="in">
+			<div v-html="infoNow"></div>
+		</div>
+	</div>
+	<script>
+	var ed = new Vue({
+			el: "#resumeEditor",
+			data:{
+				infoNow:"",
+				flag:false,
+				write:false,
+				info: marked(`
+### 个人信息
+
+ - 金辉/男/1995
+ - 本科/计算机科学与技术
+ - 技术博客：[https://hhhjiro.github.io](https://hhhjiro.github.io)
+ - Github: [https://github.com/HHHJiro/hoogeek](https://github.com/HHHJiro/hoogeek)
+
+
+
+---
+
+### 技能清单
+
+#### 了解以下技术
+
+
+- Web开发：Node/Javascript
+- Web框架：Express/koa
+- 前端框架：Vue
+- 数据库相关：MongoDB/SQLserver
+- 版本管理、文档和自动化部署:Git/Webpack
+
+---
+
+### 个人总结
+
+- 喜欢新的技术，有geek精神，有良好的沟通能力
+- 经常浏览技术社区，积极了解社区新动态
+- 喜欢Maroon5，喜欢电子音乐
+
+
+### 致谢
+
+感谢您花时间阅读我的简历，期待能有机会和您共事。
+`)
+			},
+			watch:{
+				write:function(val ,oldval)
+				{
+					if(val == true)
+						this.showInfo()
+				}
+			},
+			methods:{
+				showInfo(){
+					let n = 0
+					let timer = setInterval(() => {
+						this.infoNow = this.info.substring(0,n)
+						n++
+						this.$nextTick(() => {
+             this.$refs.in.scrollTop = 100000
+            })
+						if(n===this.info.length-1)
+							{
+								clearInterval(timer)
+							}
+					},20)
+				}
+			}
+		})
+		var vm = new Vue({
+			el: "#resume",
+			data:{
+				msg:`
+/*现在是2017.3 春招正在火热的进行中*/
+	* {
+	  -webkit-transition: all .3s;
+	  transition: all .3s;
+	}
+	html {
+ 	 color: #fecea8; background: #2A363b 
+	}
+	/* 文字离边框太近了 */
+	.styleEditor {
+	  padding: .5em;
+	  border: 1px solid;
+	  margin: .5em;
+	  overflow: auto;
+	  width: 45vw; height: 90vh;
+	}
+	/* 加点 3D 效果呗 */
+	html{
+	  -webkit-perspective: 1000px;
+	          perspective: 1000px;
+	}
+	.styleEditor {
+	  position: fixed; left: 0; top: 0; 
+	  -webkit-transition: none; 
+	  transition: none;
+	  -webkit-transform: rotateY(10deg) translateZ(-100px) ;
+	          transform: rotateY(10deg) translateZ(-100px) ;
+	}
+	/* 接下来我给自己准备一个编辑器 */
+	#resumeEditor{
+	  position: fixed; right: 0; top: 0;
+	  padding: .5em;  margin: .5em;
+	  width: 48vw; height: 90vh; 
+	  border: 1px solid;
+	  background: white; color: #222;
+	  overflow: auto;
+	}
+	/* 好了，我开始写简历了 */
+				`,
+				resume:'',
+			},
+			created(){
+				this.showResume()
+			},
+			methods:{
+				showResume(){
+					let n = 0
+					let timer = setInterval(() => {
+						this.resume = this.msg.substring(0,n)
+						n++
+						this.$nextTick(() => {
+                 this.$refs.res.scrollTop = 100000
+                })
+						if(this.msg[n]==='#' &&this.msg[n+1]=='r')
+						{
+							ed.flag = true
+						}
+						if(n===this.msg.length-1)
+							{
+								clearInterval(timer)
+								ed.write=true
+							}
+					},20)
+				}
+			},
+			computed:{
+				styleCode(){
+					return '<style>' + this.resume + '</style>'
+				}
+			}
+		})
+	</script>
+</body>
+</html>

@@ -15,11 +15,12 @@ ul, ol, li {
 	transition: ease 0.5s;
 	color:#FAFAFA;
 }
-h1{
-	text-indent: 0.7em;
+h2{
+	text-align: center;
 }
 a{
 	text-decoration: none;
+	color: #ff847c;
 }
 .container{
 	position: absolute;
