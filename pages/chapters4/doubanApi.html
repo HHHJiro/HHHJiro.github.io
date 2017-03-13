@@ -88,7 +88,7 @@
 			var
 				js = document.createElement('script'),
 				head = document.getElementsByTagName('head')[0];
-			js.src = 'http://api.douban.com/v2/movie/in_theaters?callback=refreshPrice';
+			js.src = 'https://api.douban.com/v2/movie/in_theaters?callback=refreshPrice';
 			head.appendChild(js);
 			p.innerHTML = "拿到数据，渲染dom"
 		}
