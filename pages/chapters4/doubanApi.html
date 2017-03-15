@@ -60,26 +60,66 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		function refreshPrice(data) {
+		function refreshMovie(data) {
 			let movie = document.getElementById('movie');
-			let{count,subjects} = data
-			for(let{rating:{average},genres,title,images:{large}} of subjects){
-				let
-					box = document.createElement('div'),
-					imgbox = document.createElement('div'),
-					img = document.createElement('img'),
-					info = document.createElement('p');
-				box.className = 'box'; 
-				imgbox.className = 'img'; 
-				img.className = 'image'; 
-				info.className = 'info'; 
-				img.src = large;
-				info.innerHTML = title;
-				imgbox.appendChild(img)
-				box.appendChild(imgbox)
-				box.appendChild(info)
-				movie.appendChild(box);
-			}
+			var{count,subjects} = data
+			//2.82s
+			handleprint(subjects,process,showEnd)
+			//3.19s
+			// for(let{rating:{average},genres,title,images:{large}} of subjects){
+			// 	let
+			// 		box = document.createElement('div'),
+			// 		imgbox = document.createElement('div'),
+			// 		img = document.createElement('img'),
+			// 		info = document.createElement('p');
+			// 	box.className = 'box'; 
+			// 	imgbox.className = 'img'; 
+			// 	img.className = 'image'; 
+			// 	info.className = 'info'; 
+			// 	img.src = large;
+			// 	info.innerHTML = title;
+			// 	imgbox.appendChild(img)
+			// 	box.appendChild(imgbox)
+			// 	box.appendChild(info)
+			// 	movie.appendChild(box);
+			// }
+
+		}
+		function showEnd(){
+			var p = document.getElementById('test-jsonp')
+			p.innerHTML = "渲染完成"
+		}
+		function process(movie){
+			let moviebox = document.getElementById('movie');
+			let{rating:{average},genres,title,images:{large}} = movie
+			let
+				box = document.createElement('div'),
+				imgbox = document.createElement('div'),
+				img = document.createElement('img'),
+				info = document.createElement('p');
+
+			box.className = 'box'; 
+			imgbox.className = 'img'; 
+			img.className = 'image'; 
+			info.className = 'info'; 
+			img.src = large;
+			info.innerHTML = `${title} Rate:${average}`;
+			imgbox.appendChild(img)
+			box.appendChild(imgbox)
+			box.appendChild(info)
+			moviebox.appendChild(box);
+		}
+		function handleprint(subjects,process,cb){
+			let movies = subjects.concat()
+			setTimeout(function(){
+				process(movies.shift())
+				if(movies.length>0){
+					setTimeout(arguments.callee,25)
+				}
+				else{
+					cb()
+				}
+			})
 
 		}
 		function getMovie() {
@@ -88,7 +128,7 @@
 			var
 				js = document.createElement('script'),
 				head = document.getElementsByTagName('head')[0];
-			js.src = 'http://api.douban.com/v2/movie/in_theaters?callback=refreshPrice';
+			js.src = 'https://api.douban.com/v2/movie/in_theaters?callback=refreshMovie';
 			head.appendChild(js);
 			p.innerHTML = "拿到数据，渲染dom"
 		}
