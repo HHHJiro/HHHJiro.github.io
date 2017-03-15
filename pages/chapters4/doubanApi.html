@@ -128,7 +128,11 @@
 			var
 				js = document.createElement('script'),
 				head = document.getElementsByTagName('head')[0];
+<<<<<<< HEAD
 			js.src = 'https://api.douban.com/v2/movie/in_theaters?callback=refreshMovie';
+=======
+			js.src = 'https://api.douban.com/v2/movie/in_theaters?callback=refreshPrice';
+>>>>>>> f3c8391d2d283d9cb49b4be88cd8d4be0d91c395
 			head.appendChild(js);
 			p.innerHTML = "拿到数据，渲染dom"
 		}
