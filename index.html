@@ -1,31 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<title>HHH小站</title>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/index.css">
-</head>
-<body>
-	<div class="container">
-		<h2><a href="pages/resume.html" target="_blank">个人简历</a></h2>
-		<div id="app">
-			<ul>
-				<li v-for="item in test" class="li liout" :style="{ marginBottom: item.size + 'px' }" @click="shownext(item)">
-					{{item.title}}
-					<transition name="fade">
-						<ul v-if="!item.show">
-							<li v-for="link in item.content" :class="{show:item.show}" class="lin"
-							@click.stop="doThis(link)">
-								<a :href="link.href" @click.prevent="" >{{link.ctitle}}</a>
-							</li>
-						</ul>
-					</transition>
-				</li>
-			</ul>
-		</div>
-	</div>
-	<script src="js/index.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>请假</title>
+    <script type="module" crossorigin src="/assets/index.693a4555.js"></script>
+    <link rel="modulepreload" href="/assets/vendor.a33c0824.js">
+    <link rel="stylesheet" href="/assets/vendor.7f0d5fb5.css">
+    <link rel="stylesheet" href="/assets/index.5f448dc5.css">
+  </head>
+  <body>
+    <div id="app"></div>
+    
+  </body>
 </html>
