@@ -1,17 +1,539 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>请假</title>
-    <script type="module" crossorigin src="/assets/index.3b422776.js"></script>
-    <link rel="modulepreload" href="/assets/vendor.b8f42019.js">
-    <link rel="stylesheet" href="/assets/vendor.6b29eae6.css">
-    <link rel="stylesheet" href="/assets/index.b7b24191.css">
-  </head>
-  <body>
-    <div id="app"></div>
-    
-  </body>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <title>欲买桂花同载酒</title>
+  <style>
+    :root {
+      --primary-color: #ff4d79;
+      --secondary-color: #ff8fab;
+      --bg-color: #1a1a2e;
+      --text-color: #ffffff;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      color: var(--text-color);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .hero p {
+      font-size: 1.5rem;
+      max-width: 800px;
+      margin-bottom: 2rem;
+      animation: fadeIn 2.5s ease-in-out;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 30px;
+      background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: bold;
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: fadeIn 3s ease-in-out;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(255, 77, 121, 0.3);
+    }
+
+    .skills {
+      padding: 100px 20px;
+      background-color: #16213e;
+      text-align: center;
+    }
+
+    .skills-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .skill-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 30px;
+      width: 250px;
+      transition: transform 0.3s;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .skill-card:hover {
+      transform: translateY(-10px);
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .skill-card i {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+    }
+
+    .projects {
+      padding: 100px 20px;
+      text-align: center;
+    }
+
+    .project-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      overflow: hidden;
+      margin-bottom: 30px;
+      transition: transform 0.3s;
+      max-width: 1000px;
+      margin: 0 auto 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .heart-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 50px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    }
+
+    .hidden {
+      opacity: 0;
+      filter: blur(5px);
+      transform: translateX(-100%);
+      transition: all 1s;
+    }
+
+    .show {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateX(0);
+    }
+
+    .contact {
+      padding: 100px 20px;
+      text-align: center;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    }
+
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 40px;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 16px;
+    }
+
+    .form-group textarea {
+      height: 150px;
+      resize: vertical;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      background-color: #0f0f23;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-20px);
+      }
+
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+        padding: 0 20px;
+      }
+
+      .skill-card {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+
+    /* 打字机效果 */
+    .typewriter {
+      overflow: hidden;
+      border-right: 3px solid var(--primary-color);
+      white-space: nowrap;
+      margin: 0 auto;
+      letter-spacing: 2px;
+      animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from {
+        width: 0
+      }
+
+      to {
+        width: 100%
+      }
+    }
+
+    @keyframes blink-caret {
+
+      from,
+      to {
+        border-color: transparent
+      }
+
+      50% {
+        border-color: var(--primary-color)
+      }
+    }
+
+    /* 3D爱心 */
+    .heart-3d {
+      width: 100px;
+      height: 100px;
+      margin: 20px auto;
+      transform-style: preserve-3d;
+      animation: rotateHeart 10s infinite linear;
+    }
+
+    @keyframes rotateHeart {
+      0% {
+        transform: rotateY(0) rotateX(0);
+      }
+
+      100% {
+        transform: rotateY(360deg) rotateX(360deg);
+      }
+    }
+
+    /* 粒子效果 */
+    .particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .pic {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .pic img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+  <!-- 粒子背景 -->
+  <canvas id="particles" class="particles"></canvas>
+
+  <!-- 英雄区域 -->
+  <section class="hero">
+    <canvas id="heartCanvas" class="heart-canvas"></canvas>
+    <div style="position: relative; z-index: 2;">
+      <h1><span class="typewriter">For 赵锦</span></h1>
+      <p>小露一手</p>
+      <button class="btn" id="surpriseBtn">点击有惊喜</button>
+
+      <!-- 3D爱心 -->
+      <div class="heart-3d" id="heart3d"></div>
+    </div>
+  </section>
+
+  <section class="pic">
+    <img src="http://img.52desk.com/tp/2330060QH5O.jpg" alt="">
+  </section>
+
+  <script>
+    // 滚动动画
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    });
+
+    const hiddenElements = document.querySelectorAll('.hidden');
+    hiddenElements.forEach((el) => observer.observe(el));
+
+    // 粒子背景
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const particles = [];
+    const particleCount = 100;
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 3 + 1,
+        speedX: Math.random() * 1 - 0.5,
+        speedY: Math.random() * 1 - 0.5
+      });
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+
+        ctx.fillStyle = `rgba(255, 77, 121, ${p.size / 3})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+
+        p.x += p.speedX;
+        p.y += p.speedY;
+
+        if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+      }
+
+      requestAnimationFrame(animateParticles);
+    }
+
+    animateParticles();
+
+    // 3D爱心
+    function create3DHeart() {
+      const heart3d = document.getElementById('heart3d');
+
+      for (let i = 0; i < 36; i++) {
+        const layer = document.createElement('div');
+        layer.style.position = 'absolute';
+        layer.style.width = '100px';
+        layer.style.height = '100px';
+        layer.style.background = `rgba(255, 77, 121, ${0.05 + i * 0.02})`;
+        layer.style.borderRadius = '50%';
+        layer.style.transform = `rotateY(${i * 10}deg) rotateX(${i * 10}deg) translateZ(20px)`;
+
+        // 爱心形状
+        layer.style.clipPath = 'path("M10,6 Q10,0 15,0 T20,6 Q20,10 15,14 T10,6")';
+
+        heart3d.appendChild(layer);
+      }
+    }
+
+    create3DHeart();
+
+    // 爱心烟花
+    const heartCanvas = document.getElementById('heartCanvas');
+    const heartCtx = heartCanvas.getContext('2d');
+
+    heartCanvas.width = window.innerWidth;
+    heartCanvas.height = window.innerHeight;
+
+    const hearts = [];
+
+    function createHeart(x, y) {
+      const size = Math.random() * 20 + 10;
+      const speedX = Math.random() * 4 - 2;
+      const speedY = Math.random() * -3 - 2;
+      const color = `hsl(${Math.random() * 20 + 340}, 100%, 70%)`;
+
+      hearts.push({
+        x, y, size, speedX, speedY, color,
+        scale: 1,
+        alpha: 1
+      });
+    }
+
+    function animateHearts() {
+      heartCtx.clearRect(0, 0, heartCanvas.width, heartCanvas.height);
+
+      for (let i = hearts.length - 1; i >= 0; i--) {
+        const heart = hearts[i];
+
+        heartCtx.save();
+        heartCtx.globalAlpha = heart.alpha;
+        heartCtx.fillStyle = heart.color;
+
+        heartCtx.beginPath();
+        heartCtx.moveTo(heart.x, heart.y - heart.size / 4);
+
+        // 绘制爱心
+        heartCtx.bezierCurveTo(
+          heart.x, heart.y - heart.size / 2,
+          heart.x - heart.size / 2, heart.y - heart.size / 2,
+          heart.x - heart.size / 2, heart.y
+        );
+        heartCtx.bezierCurveTo(
+          heart.x - heart.size / 2, heart.y + heart.size / 4,
+          heart.x, heart.y + heart.size / 1.5,
+          heart.x, heart.y + heart.size
+        );
+        heartCtx.bezierCurveTo(
+          heart.x, heart.y + heart.size / 1.5,
+          heart.x + heart.size / 2, heart.y + heart.size / 4,
+          heart.x + heart.size / 2, heart.y
+        );
+        heartCtx.bezierCurveTo(
+          heart.x + heart.size / 2, heart.y - heart.size / 2,
+          heart.x, heart.y - heart.size / 2,
+          heart.x, heart.y - heart.size / 4
+        );
+
+        heartCtx.closePath();
+        heartCtx.fill();
+
+        heart.x += heart.speedX;
+        heart.y += heart.speedY;
+        heart.speedY += 0.1;
+        heart.alpha -= 0.01;
+
+        if (heart.alpha <= 0) {
+          hearts.splice(i, 1);
+        }
+      }
+
+      requestAnimationFrame(animateHearts);
+    }
+
+    animateHearts();
+
+    // 惊喜按钮
+    document.getElementById('surpriseBtn').addEventListener('click', function () {
+      // 创建多个爱心
+      for (let i = 0; i < 20; i++) {
+        setTimeout(() => {
+          createHeart(
+            Math.random() * heartCanvas.width,
+            heartCanvas.height
+          );
+        }, i * 100);
+      }
+    });
+
+    // 响应式调整
+    window.addEventListener('resize', function () {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      heartCanvas.width = window.innerWidth;
+      heartCanvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+
 </html>
